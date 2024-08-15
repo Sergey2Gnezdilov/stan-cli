@@ -1,8 +1,7 @@
 # STAN CLI tool
 
- >>> fork from old github by S.Gnezdilov with mods for wildberiess <<<
 
-
+Finally! A proper NATS CLI Tool that does not *completly* suck!
 
 Uses Click to expose a good and standarized CLI interface and uses Pygments to colorize JSON content!
 
@@ -47,6 +46,7 @@ $ cat data.json | docker run --interactive --rm --env-file $PWD/local.env stan-c
 $ cat data.json | docker-compose run cli publish --cluster myCluster subject-name -
 ```
 
+
 To get the content of a channel the stancli supports
 
 ```bash
@@ -57,4 +57,5 @@ $ docker run --rm -t --env-file $PWD/local.env stan-cli:latest subscribe subject
 
 # Contact
 
-gnezdilov.sergey4@wb.ru
+Arnulfo Solis
+arnulfojr94@gmail.com
