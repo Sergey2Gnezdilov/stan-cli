@@ -25,3 +25,5 @@ STAN cluster to use. If is unset, the CLI will use NATS instead of STAN for the 
 VERBOSE = 'Verbose logging'
 
 APPEND = 'If set, this will simply output without clearing the console beforehand'  # noqa
+
+NATS_SERVLIST = 'List of servers to connect to, envvar: NATS_SERVLIST whithout host/port' #sg

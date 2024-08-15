@@ -85,7 +85,7 @@ async def block():
 
 
 @asynccontextmanager
-async def _subscribe(subject: str, callback, nc: NATS = None, sc: STAN = None, queue: str = 'nats-cli'):
+async def _subscribe(subject: str, callback, nc: NATS = None, sc: STAN = None, queue: str = 'sup-balance-pvz-franchize-group'):
     if not sc and nc:
         subscription = None
         try:
@@ -102,7 +102,7 @@ async def _subscribe(subject: str, callback, nc: NATS = None, sc: STAN = None, q
                     if is_verbose.get():
                         click.secho(f'Failed to unsubscribe but is ok will continue, {e}', err=True)
     if sc and not nc:
-        subscription = await sc.subscribe(subject, cb=callback, queue=queue)
+        subscription = await sc.subscribe(subject, cb=callback, queue=queue, start_at='first')
         try:
             yield subscription
         finally:
@@ -120,7 +120,7 @@ async def _subscribe(subject: str, callback, nc: NATS = None, sc: STAN = None, q
 
 @asynccontextmanager
 async def nats_client(host: str, port: int,
-                      user: str, password: str,
+                      user: str, password: str, servlist: str,
                       **kwargs) -> NATS:
     """Returns a NATS client already connected."""
     nc = NATS()
@@ -138,7 +138,13 @@ async def nats_client(host: str, port: int,
             click.secho('Reconnected', bg='green', fg='white',
                         bold=True, err=True)
 
-    server = f'nats://{host}:{port}'
+    server = f"nats://{host}:{port}"
+    # sg mode
+    if servlist is not None:
+        elements = [element_str.strip() for element_str in servlist.split(",")]
+        server = [f"nats://{host_i}:{port}" for host_i in elements]
+
+    print(f"List connect {server}")
 
     options = {
         'closed_cb': kwargs.get('closed_cb', closed_cb),

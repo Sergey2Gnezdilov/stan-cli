@@ -26,6 +26,7 @@ def cli():
 @click.option('--password', envvar='NATS_PASSWORD',
               help=documentation.NATS_PASSWORD)
 @click.option('--host', envvar='NATS_HOST', help=documentation.NATS_HOST)
+@click.option('--servlist', envvar='NATS_SERVLIST', help=documentation.NATS_SERVLIST) #sg
 @click.option('--port', envvar='NATS_PORT', type=int,
               default=4222, show_default=True, help=documentation.NATS_PORT)
 @click.option('--verbose', type=bool, default=False, is_flag=True,
@@ -62,6 +63,7 @@ def request(subject: str, data, timeout: int, raw: bool, **kwargs):
 @click.option('--user', envvar='NATS_USER', help=documentation.NATS_USER)
 @click.option('--password', envvar='NATS_PASSWORD',
               help=documentation.NATS_PASSWORD)
+@click.option('--servlist', envvar='NATS_SERVLIST', help=documentation.NATS_SERVLIST) #sg
 @click.option('--host', envvar='NATS_HOST', help=documentation.NATS_HOST)
 @click.option('--port', envvar='NATS_PORT', type=int,
               default=4222, show_default=True, help=documentation.NATS_PORT)
@@ -69,6 +71,7 @@ def request(subject: str, data, timeout: int, raw: bool, **kwargs):
               help=documentation.APPEND)
 @click.option('--verbose', type=bool, default=False, is_flag=True,
               show_default=True, help=documentation.VERBOSE)
+
 def subscribe(subject: str, cluster: str, pretty_json: bool, **kwargs):
     """Subscribe to the specified STAN command."""
     helpers.is_verbose.set(kwargs.pop('verbose'))
@@ -96,6 +99,7 @@ def subscribe(subject: str, cluster: str, pretty_json: bool, **kwargs):
 @click.option('--user', envvar='NATS_USER', help=documentation.NATS_USER)
 @click.option('--password', envvar='NATS_PASSWORD',
               help=documentation.NATS_PASSWORD)
+@click.option('--servlist', envvar='NATS_SERVLIST', help=documentation.NATS_SERVLIST) #sg
 @click.option('--host', envvar='NATS_HOST', help=documentation.NATS_HOST)
 @click.option('--port', envvar='NATS_PORT', type=int,
               default=4222, show_default=True, help=documentation.NATS_PORT)
