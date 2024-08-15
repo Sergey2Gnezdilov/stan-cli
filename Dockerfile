@@ -15,3 +15,4 @@ COPY ./stancli/ ./stancli/
 ENTRYPOINT ["/usr/local/bin/python", "/app/entrypoint.py"]
 
 CMD ["--help"]
+
